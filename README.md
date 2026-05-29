@@ -1,11 +1,8 @@
 # 复利复盘 Skill（Revival Retrospective Skill）
-# 复利复盘技能（Revival Retrospective Skill）
 
 一个复盘对话 Skill，帮用户把日常经验压缩成可复用原则。
-一种回顾对话 Skill，帮助用户将日常经验提炼成可复用原则。
 
 > **核心价值**：每次对话只给一个 24 小时可执行的行动指南，
-> **核心价值**：每次对话只提供一个24小时内可执行的行动指南，
 > 并记住你提炼的原则，下次对话继续深化。
 
 ## 🚀 快速开始
@@ -39,11 +36,8 @@
 
 对 AI 说：
 - "最近状态不太好"
-- “最近状态不太好”
 - "帮我复盘一下今天的一件事"
-- “帮我复盘一下今天的一件事”
 - "试试复利复盘"
-- “试试复利复盘”
 
 ## 📖 用户使用说明
 
@@ -59,7 +53,8 @@
 .
 ├── README.md                    ← 本文件
 ├── system-prompt.md             ← 通用 System Prompt
-├── memory-protocol.md           ← 用户使用协议
+├── memory.md                    ← 记忆文件（AI 自动读写）
+├── memory-protocol.md           ← 记忆机制说明
 ├── test-checklist.md            ← 自测清单
 ├── CHANGELOG.md                 ← 版本变更日志
 └── patches/                     ← 各平台适配补丁
@@ -108,12 +103,13 @@
 
 ## 🔄 记忆机制
 
-本 Skill 采用用户自持记忆方案：
+本 Skill 采用自动记忆方案：
 
-1. AI 每次收尾会生成一段结构化记忆条目
-2. 用户保存到自己的文件（备忘录 / Notion / txt 都行）
-3. 下次对话时，把记忆条目粘贴给 AI
-4. AI 会读取并继续深化之前的复盘
+1. AI 每次收尾自动将提炼的原则写入 `memory.md`
+2. 下次对话时 AI 自动读取，继续深化之前的复盘
+3. 用户不需要手动操作
+
+降级方案（GPT / DeepSeek / Gemini 等无文件权限的平台）：AI 会把记忆条目输出在对话中，用户自行保存，下次粘贴回来。
 
 详见 [memory-protocol.md](./memory-protocol.md)
 
@@ -121,10 +117,7 @@
 
 | 版本 | 日期 | 说明 |
 |------|------|------|
+| v1.1.0 | 2026-05-29 | 记忆机制改为自动写入文件，新增 memory.md |
 | v1.0.0 | 2026-05-28 | 初始版本：核心 Prompt + 记忆机制 + 4 平台补丁 + 自测清单 |
 
 详见 [CHANGELOG.md](./CHANGELOG.md)
-
-## 📄 License
-
-MIT License - 见 [LICENSE](LICENSE)
